@@ -1,0 +1,31 @@
+PLAYER_CLASS=com.biotools.poker.opponent.OptiOpponent
+PLAYER_NAME=Sparbot
+STRAT_DIR=data/opti4.zip
+
+PREFLOP_STRAT_FILE=OPTI4.preflop
+PREFLOP_BUCKET_FILE=OPTI4.preflop_buckets
+
+NUM_POSTFLOP_STRATS=8
+
+POSTFLOP_STRAT_FILE_1=OPTI4.Kk 0 false
+POSTFLOP_STRAT_FILE_2=OPTI4.KbC 1 false
+POSTFLOP_STRAT_FILE_3=OPTI4.KbRc 2 false
+POSTFLOP_STRAT_FILE_4=OPTI4.KbRrC 3 false
+POSTFLOP_STRAT_FILE_5=OPTI4.Bc 1 true
+POSTFLOP_STRAT_FILE_6=OPTI4.BrC 2 true
+POSTFLOP_STRAT_FILE_7=OPTI4.BrRc 3 true
+POSTFLOP_STRAT_FILE_8=OPTI4.BrRrC 4 true
+
+HEADS_UP_ONLY=true
+
+BUCKET_SPLIT=false
+
+#######################
+# MISC PREFS          #
+#######################
+
+RANDOM_SEED=1234
+
+AI_NAME=Sparbot
+
+COMMENTS=Sparbot is a limit heads-up only player which uses game-theory to play a pseudo-optimal strategy.
