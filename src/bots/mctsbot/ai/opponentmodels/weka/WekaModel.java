@@ -35,7 +35,7 @@ public abstract class WekaModel implements OpponentModel{
 
 	protected static final Logger logger = Logger.getLogger(WekaRegressionModel.class);
 	
-	protected final PlayerTrackingVisitor visitor;
+	protected PlayerTrackingVisitor visitor;
 	private final Deque<PlayerTrackingVisitor> visitors = new ArrayDeque<PlayerTrackingVisitor>();
 	
 	private final PostCheckBetInstances postCheckBetInstance;
@@ -44,8 +44,8 @@ public abstract class WekaModel implements OpponentModel{
 	private final PostFoldCallRaiseInstances postFoldCallRaiseInstance;
 	private final ShowdownInstances showdownInstance;
 	
-	public WekaModel(boolean overwrite) {
-		this.visitor = new ActionTrackingVisitor(overwrite);
+	public WekaModel() {
+		this.visitor = new PlayerTrackingVisitor();
 		
 		this.preCheckBetInstance = new PreCheckBetInstances("PreCheckBet", "@attribute prob real"+InstancesBuilder.nl);
 		this.postCheckBetInstance = new PostCheckBetInstances("PostCheckBet", "@attribute prob real"+InstancesBuilder.nl);
@@ -54,6 +54,11 @@ public abstract class WekaModel implements OpponentModel{
 		this.showdownInstance = new ShowdownInstances("Showdown", "@attribute prob real"+InstancesBuilder.nl);
 	}
 
+//	public long getVisitorSize() {
+//		System.out.print("<" + visitors.size() + ">");
+//		return visitors.size();
+//	}
+	
 	@Override
 	public void assumePermanently(GameState gameState) {
 		visitor.readHistory(gameState);
@@ -69,7 +74,8 @@ public abstract class WekaModel implements OpponentModel{
 
 	@Override
 	public void forgetLastAssumption() {
-		visitors.pop();
+		if(!visitors.isEmpty())
+			visitors.pop();
 	}
 
 	protected PlayerTrackingVisitor getTopVisitor() {
